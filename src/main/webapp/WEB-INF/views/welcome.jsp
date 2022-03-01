@@ -13,13 +13,7 @@
     <title>Welcome</title>
 </head>
 <body>
-<nav class="navbar navbar-expand  navbar-dark bg-dark">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="./welcome.jsp">Home</a>
-        </div>
-    </div>
-</nav>
+<%@ include file="fragments/menu.jsp"%>
 <%! String greeting = "Welcome to Web Shopping Mall";
     String tagline = "Welcome to Web Market!"; %>
 <div class="jumbotron">
@@ -54,9 +48,6 @@
     </div>
     <hr>
 </div>
-<footer class="container">
-    <p>&copy; WebMarket</p>
-</footer>
-
+    <%@include file="fragments/footer.jsp"%>
 </body>
 </html>

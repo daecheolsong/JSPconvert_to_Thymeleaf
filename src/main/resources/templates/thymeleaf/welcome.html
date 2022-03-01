@@ -4,13 +4,7 @@
     <title>Welcome</title>
 </head>
 <body>
-<nav class="navbar navbar-expand  navbar-dark bg-dark">
-    <div class = "container">
-        <div class = "navbar-header">
-            <a class="navbar-brand" th:href="@{./welcome.html}">Home</a>
-        </div>
-    </div>
-</nav>
+<nav th:replace="~{thymeleaf/fragments/header :: headerCopy}"></nav>
 <div class="jumbotron">
     <div class="container">
         <h1 class ="display-3">
@@ -26,14 +20,11 @@
         </h3>
         <th:block th:with="hour=${#temporals.hour(date)}">
             현재 접속 시각:<span th:text = " ${#temporals.format(date,'HH:mm:ss')} + ':AM'" th:if="${hour lt 12}"></span>
-            <span th:text = " ${hour} % 12 +':'+${#temporals.format(date,'mm:ss')} + ':PM'" th:if="${hour ge 12}"></span>
+            <span th:text = " ${hour} % 12+':'+${#temporals.format(date,'mm:ss')} + ':PM'" th:if="${hour ge 12}"></span>
         </th:block>
     </div>
     <hr>
 </div>
-<footer class="container">
-    <p>&copy; WebMarket</p>
-</footer>
-
+<footer th:replace="~{thymeleaf/fragments/footer :: footerCopy}"></footer>
 </body>
 </html>

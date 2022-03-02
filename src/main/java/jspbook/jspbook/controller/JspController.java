@@ -11,4 +11,10 @@ public class JspController {
 
         return "welcome";
     }
+
+    @GetMapping("/products")
+    public String products() {
+
+        return "products";
+    }
 }

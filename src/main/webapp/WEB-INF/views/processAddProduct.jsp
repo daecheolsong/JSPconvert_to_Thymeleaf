@@ -46,7 +46,7 @@
 
         dao.addProduct(newProduct);
 
-        response.sendRedirect("./products.jsp");
+        response.sendRedirect("/products");
 
         %>
 

@@ -4,8 +4,7 @@ import jspbook.jspbook.dto.Product;
 import jspbook.jspbook.repository.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,7 +17,7 @@ public class ThymeleafController {
     ProductRepository productRepository = new ProductRepository();
 
 
-    @GetMapping("")
+    @GetMapping({"", "/welcome"})
     public String welcome(Model model) {
         LocalDateTime localTime = LocalDateTime.now();
         String greeting = "Welcome to Web Shopping Mall";
@@ -31,6 +30,28 @@ public class ThymeleafController {
 
     @GetMapping("/products")
     public String products(Model model) {
+        ArrayList<Product> productList = productRepository.getAllProducts();
+        model.addAttribute("productList", productList);
+        return "thymeleaf/products";
+    }
+
+    @GetMapping("/product/{id}")
+    public String product(@PathVariable("id")String id, Model model) {
+        Product productById = productRepository.getProductById(id);
+        model.addAttribute("product", productById);
+        return "thymeleaf/product";
+    }
+
+    @GetMapping("/addProduct")
+    public String addProduct(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
+        return "thymeleaf/addProduct";
+    }
+
+    @PostMapping("/products")
+    public String productsResult(Product product, Model model) {
+        productRepository.addProduct(product);
         ArrayList<Product> productList = productRepository.getAllProducts();
         model.addAttribute("productList", productList);
         return "thymeleaf/products";

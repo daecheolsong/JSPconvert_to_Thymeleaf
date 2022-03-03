@@ -15,7 +15,8 @@
 <body>
 <%@ include file="fragments/menu.jsp"%>
 <%! String greeting = "Welcome to Web Shopping Mall";
-    String tagline = "Welcome to Web Market!"; %>
+    String tagline = "Welcome to Web Market!";
+%>
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-3">
@@ -30,6 +31,7 @@
             <%=tagline%>
         </h3>
         <%
+            response.setIntHeader("Refresh", 5);
             Date day = new java.util.Date();
             String am_pm;
             int hour = day.getHours();

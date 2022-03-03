@@ -1,0 +1,42 @@
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<!--<%@ page import="jspbook.jspbook.dto.Product" %>-->
+<!--<%@ page import="jspbook.jspbook.repository.ProductRepository" %>-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <title>제품 상세 정보</title>
+</head>
+<body>
+<!--<jsp:include page="fragments/menu.jsp"/>-->
+<span th:replace="~{thymeleaf/fragments/header :: headerCopy}"></span>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-3">상품 정보</h1>
+    </div>
+</div>
+
+<!--<%-->
+<!--String id = request.getParameter("id");-->
+<!--ProductRepository dao = ProductRepository.getInstance();-->
+<!--Product product = dao.getProductById(id);-->
+<!--%>-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 th:text="${product.pname}"><%=product.getPname()%></h3>
+            <p th:text="${product.description}"><%=product.getDescription()%></p>
+            <p> <b>상품 코드 : <b><span class="badge badge-danger" th:text="${product.productId}"> <%=product.getProductId()%></span> </b></b></p>
+            <p> <b>제조사</b> : [[${product.manufacturer}]]</p>
+            <p> <b>분류</b> : [[${product.category}]]</p>
+            <p> <b>제고수</b> : [[${product.unitsInStock}]]</p>
+            <h4 th:text="${product.unitPrice}"><%=product.getUnitPrice()%>원</h4>
+            <p> <a th:href="@{#}" class="btn btn-info">상품 주문 &raquo;</a>
+                <a th:href="@{/products}" class="btn btn-secondary">상품 목록 &raquo;</a>
+        </div>
+    </div>
+</div>
+<!--<jsp:include page="fragments/footer.jsp"/>-->
+<span th:replace="~{thymeleaf/fragments/footer :: footerCopy}"></span>
+</body>
+</html>

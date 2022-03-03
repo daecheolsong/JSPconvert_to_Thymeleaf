@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="jspbook.jspbook.dto.Product" %>
-<jsp:useBean id="productDAO" class="jspbook.jspbook.repository.ProductRepository" scope="session"/>
+<%@ page import="jspbook.jspbook.repository.ProductRepository" %>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -22,7 +22,8 @@
         </div>
     </div>
     <%
-        ArrayList<Product> listOfProducts = productDAO.getAllProducts();
+        ProductRepository dao = ProductRepository.getInstance();
+        ArrayList<Product> listOfProducts = dao.getAllProducts();
     %>
     <div class="container">
         <div class="row" align="center">
@@ -34,6 +35,7 @@
                 <h3><%=product.getPname()%></h3>
                 <p><%=product.getDescription()%></p>
                 <p><%=product.getUnitPrice()%>원</p>
+                <p> <a href="/product?id=<%=product.getProductId()%>" class="btn btn-secondary" role="button">상세 정보 &raquo;</a></p>
             </div>
 
             <%

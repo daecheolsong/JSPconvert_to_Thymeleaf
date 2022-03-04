@@ -10,7 +10,7 @@
 <%@ page import="jspbook.jspbook.repository.ProductRepository" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../resources/css/bootstrap.min.css"/>
     <title>제품 상세 정보</title>
 </head>
 <body>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrap.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
 <script src="../resources/js/validation.js"></script>
     <title>상품등록</title>
 </head>

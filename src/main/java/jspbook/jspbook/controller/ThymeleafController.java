@@ -2,20 +2,29 @@ package jspbook.jspbook.controller;
 
 import jspbook.jspbook.dto.Product;
 import jspbook.jspbook.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/thymeleaf")
+@RequiredArgsConstructor
+@PropertySource("classpath:application.properties")
 public class ThymeleafController {
 
     ProductRepository productRepository = new ProductRepository();
 
+    @Value("${file.dir}")
+    String fileDir;
 
     @GetMapping({"", "/welcome"})
     public String welcome(Model model) {
@@ -43,17 +52,28 @@ public class ThymeleafController {
     }
 
     @GetMapping("/addProduct")
-    public String addProduct(Model model) {
+    public String addProductView(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
         return "thymeleaf/addProduct";
     }
 
     @PostMapping("/products")
-    public String productsResult(Product product, Model model) {
-        productRepository.addProduct(product);
+    public String addProduct(@RequestParam("productImage")MultipartFile file ,Model model, Product product) throws IOException {
+
+        saveFile(product,file);
         ArrayList<Product> productList = productRepository.getAllProducts();
         model.addAttribute("productList", productList);
         return "thymeleaf/products";
+    }
+
+    private void saveFile(Product product,MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            String originalFileName = file.getOriginalFilename();
+            String fullPath = fileDir + originalFileName;
+            product.setFilename(originalFileName);
+            productRepository.addProduct(product);
+            file.transferTo(new File(fullPath));
+        }
     }
 }

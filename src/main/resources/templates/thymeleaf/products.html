@@ -27,7 +27,8 @@
 <!--      Product product = listOfProducts.get(i);-->
 <!--      %>-->
       <div class="col-md-4" th:each="product : ${productList}">
-        <h3>[[${product.pname}]]</h3>
+          <img th:src="|@{/images}/${product.filename}|" width="300px" height="300px" >
+          <h3>[[${product.pname}]]</h3>
         <p>[[${product.description}]]</p>
         <p>[[${product.unitPrice}]]원</p>
         <p> <a th:href="@{/thymeleaf/product/{id} (id=${product.productId})}" class="btn btn-secondary" role="button">상세 정보 &raquo;</a></p>

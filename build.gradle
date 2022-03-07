@@ -23,6 +23,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // 파일 업로드 외부 라이브러리
+    implementation files('libs/cos.jar')
 }
 
 tasks.named('test') {

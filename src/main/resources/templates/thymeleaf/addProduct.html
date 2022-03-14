@@ -2,8 +2,13 @@
 <meta charset="UTF-8">
 <head>
     <link rel="stylesheet" th:href="@{../../../resources/css/bootstrap.min.css}">
-
-    <script src="../resources/js/validation.js"></script>
+    <style>
+        .field-error{
+            border-color: #dc3545;
+            color:#dc3545;
+            font-size: 70%;
+        }
+    </style>
     <title>상품등록</title>
 </head>
 <body>
@@ -11,75 +16,86 @@
 <span th:replace="~{thymeleaf/fragments/header :: headerCopy}"></span>
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">상품등록</h1>
+        <h1 class="display-3" th:text="#{title}"></h1>
     </div>
 </div>
 
 <div class="container">
+    <div class="text-right">
+        <a href="?language=ko">Korean</a>|<a href="?language=en">English</a>
+    </div>
     <form name="newProduct" th:object="${product}" th:action="@{/thymeleaf/products}" class="form-horizontal" method="post" enctype="multipart/form-data">
         <div class="form-group row">
-            <label class="col-sm-2">상품코드</label>
+            <label class="col-sm-2" th:text="#{productId}"></label>
             <div class="col-sm-3">
-                <input type="text" name="productId" class="form-control">
+                <input type="text" th:field="*{productId}" class="form-control"/>
+                <p class="field-error" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}"></p>
+
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2">상품명</label>
+            <label class="col-sm-2" th:text="#{pname}">상품명</label>
             <div class="col-sm-3">
-                <input type="text" name="pname" class="form-control">
+                <input type="text" th:field="*{pname}" class="form-control">
+                <p class="field-error" th:if="${#fields.hasErrors('pname')}" th:errors="*{pname}"></p>
+
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2">가격</label>
+            <label class="col-sm-2" th:text="#{unitPrice}">가격</label>
             <div class="col-sm-3">
-                <input type="text" name="unitPrice" class="form-control">
+                <input type="text" th:field="*{unitPrice}" class="form-control">
+                <p class="field-error" th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></p>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2">상세정보</label>
+            <label class="col-sm-2" th:text="#{description}">상세정보</label>
             <div class="col-sm-5">
-                <textarea name="description" cols="50" rows="2" class="form-control"></textarea>
+                <textarea th:field="*{description}"cols="50" rows="2" class="form-control"></textarea>
+                <p class="field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
             </div>
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-2">제조사</label>
+            <label class="col-sm-2" th:text="#{manufacturer}">제조사</label>
             <div class="col-sm-3">
-                <input type="text" name="manufacturer" class="form-control">
+                <input type="text" th:field="*{manufacturer}" class="form-control">
+                <p class="field-error" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></p>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2">분류</label>
+            <label class="col-sm-2" th:text="#{category}">분류</label>
             <div class="col-sm-3">
-                <input type="text" name="category" class="form-control">
+                <input type="text" th:field="*{category}" class="form-control">
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2">재고 수</label>
+            <label class="col-sm-2" th:text="#{unitsInStock}">재고 수</label>
             <div class="col-sm-3">
-                <input type="text" name="unitsInStock" class="form-control">
+                <input type="text" th:field="*{unitsInStock}" class="form-control">
+                <p class="field-error" th:if="${#fields.hasErrors('unitsInStock')}" th:errors="*{unitsInstock}"></p>
             </div>
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-2">상태</label>
+            <label class="col-sm-2" th:text="#{condition}">상태</label>
             <div class="col-sm-5">
-                <input type="radio" name="condition" value="New">신규 제품
-                <input type="radio" name="condition" value="Old">중고 제품
-                <input type="radio" name="condition" value="Refurbished">재생 제품
+                <input type="radio" th:field="*{condition}" value="New" th:text="#{condition_New}">
+                <input type="radio" th:field="*{condition}" value="Old" th:text="#{condition_Old}">
+                <input type="radio" th:field="*{condition}" value="Refurbished" th:text="#{condition_Refurbished}">
             </div>
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-2">이미지</label>
+            <label class="col-sm-2" th:text="#{productImage}">이미지</label>
             <div class="col-sm-5">
                 <input type="file" name="productImage" class="form-control">
             </div>
@@ -88,7 +104,7 @@
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-10 ">
-                <input type="submit" class="btn btn-primary" value="등록">
+                <input type="submit" class="btn btn-primary" th:value="#{button}">
             </div>
         </div>
 

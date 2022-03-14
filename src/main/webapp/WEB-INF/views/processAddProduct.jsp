@@ -32,13 +32,13 @@
             price = Integer.valueOf(unitPrice);
         }
 
-        long stock;
+        Integer stock;
 
         if (unitsInStock.isEmpty()) {
             stock = 0;
         }
         else
-            stock = Long.valueOf(unitsInStock);
+            stock = Integer.valueOf(unitsInStock);
 
         ProductRepository dao = ProductRepository.getInstance();
 
